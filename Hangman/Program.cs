@@ -14,7 +14,7 @@ namespace Hangman
             WordSelction wordSelction = new WordSelction();
             wordSelction.chooseWord();
 
-
+            hangmanBoard.PrintBoard();
 
         }
     }

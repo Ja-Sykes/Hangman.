@@ -18,7 +18,7 @@ namespace Hangman
         private List<string> line6 = new List<string> { "|", " ", " ", " " };
         private List<string> line7 = new List<string> { "-", " ", " ", " " };
         //private List<string> line8 = new List<string> { "\n_"};
-        private List<string> guessingBoard = new List<string> { "_", "_", "_", "_", "_", "_", "_", "_", "_", "_" };
+        private List<string> guessingBoard = new List<string> { "_", };
 
         // Create the board using the individual strings/lists in the constructor
         public List<List<string>> board;
@@ -54,12 +54,13 @@ namespace Hangman
             Console.WriteLine(string.Join(" ", guessingBoard));
         }
 
-        public void UpdateGuessingBoard(string word)
+        public void UpdateGuessingBoard(string chosenWord)
         {
-            // Assuming word length is not greater than guessing board width
-            for (int i = 0; i < word.Length; i++)
+            guessingBoard.Clear();
+            
+            for (int i = 0; i < chosenWord.Length; i++)
             {
-                guessingBoard[i] = word[i].ToString();
+                guessingBoard.AddRange(new string[] { "_" });
             }
         }
 
