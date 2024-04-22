@@ -4,11 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Hangman
 {
     internal class Board
     {
-        // Define individual strings/lists
         private List<string> line0 = new List<string> { "-", "-", "-", "|" };
         private List<string> line1 = new List<string> { "|", " ", " ", " " };
         private List<string> line2 = new List<string> { "|", " ", " ", " " };
@@ -17,15 +22,13 @@ namespace Hangman
         private List<string> line5 = new List<string> { "|", " ", " ", " " };
         private List<string> line6 = new List<string> { "|", " ", " ", " " };
         private List<string> line7 = new List<string> { "-", " ", " ", " " };
-        //private List<string> line8 = new List<string> { "\n_"};
-        private List<string> guessingBoard = new List<string> { "_", };
 
-        // Create the board using the individual strings/lists in the constructor
+        public List<string> guessingBoard = new List<string> { "_", };
+
         public List<List<string>> board;
 
         public Board()
         {
-            // Initialize the board in the constructor
             board = new List<List<string>>
             {
                 line0,
@@ -39,6 +42,40 @@ namespace Hangman
             };
         }
 
+        public void UpdateHangman(int attemptsLeft)
+        {
+            switch (attemptsLeft)
+            {
+                case 6:
+                    // Update line1 when 6 attempts left
+                    line1[3] = "0";
+                    break;
+                case 5:
+                    // Update line2 when 5 attempts left
+                    line2[3] = "|";
+                    break;
+                case 4:
+                    // Update line3 when 4 attempts left
+                    line3[3] = "O";
+                    break;
+                case 3:
+                    // Update line4 when 3 attempts left
+                    line4[3] = "O";
+                    break;
+                case 2:
+                    // Update line5 when 2 attempts left
+                    line5[3] = "/";
+                    break;
+                case 1:
+                    // Update line6 when 1 attempt left
+                    line5[3] = "/\\";
+                    break;
+                default:
+                    // For 7 attempts left or any other cases, no changes
+                    break;
+            }
+        }
+
         public void PrintBoard()
         {
             foreach (List<string> line in board)
@@ -50,19 +87,7 @@ namespace Hangman
                 Console.WriteLine();
             }
 
-            // Print the guessing board
             Console.WriteLine(string.Join(" ", guessingBoard));
         }
-
-        public void UpdateGuessingBoard(string chosenWord)
-        {
-            guessingBoard.Clear();
-            
-            for (int i = 0; i < chosenWord.Length; i++)
-            {
-                guessingBoard.AddRange(new string[] { "_" });
-            }
-        }
-
     }
 }
